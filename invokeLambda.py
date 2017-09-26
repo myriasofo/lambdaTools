@@ -10,8 +10,9 @@ import os
 lambdaClient = boto3.client('lambda')
 
 
-def invokeLambda():
-    lambdaFunctionName = getLambdaFunctionName()
+def invokeLambda(lambdaFunctionName=None):
+    if lambdaFunctionName == None:
+        lambdaFunctionName = guessLambdaFuntionName()
 
     response = lambdaClient.invoke(
         FunctionName=lambdaFunctionName,
@@ -21,7 +22,7 @@ def invokeLambda():
 
     printLog(response)
 
-def getLambdaFunctionName():
+def guessLambdaFuntionName():
     cwd = os.getcwd()
     dirName = os.path.split(cwd)[1]
     return dirName

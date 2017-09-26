@@ -12,14 +12,16 @@ lambdaClient = boto3.client('lambda')
 
 ZIP_TEMP_FILE = 'lambda.zip'
 
-def uploadDirToAwsLambda():
-    lambdaFunctionName = getLambdaFunctionName()
+def uploadDirToAwsLambda(lambdaFunctionName=None):
+    if lambdaFunctionName == None:
+        lambdaFunctionName = guessLambdaFuntionName()
     assertValidLambdaFunctionName(lambdaFunctionName)
     print('Lambda function:', lambdaFunctionName)
+
     saveZip()
     uploadZipToAws(lambdaFunctionName)
 
-def getLambdaFunctionName():
+def guessLambdaFuntionName():
     cwd = os.getcwd()
     dirName = os.path.split(cwd)[1]
     return dirName
@@ -49,7 +51,7 @@ def uploadZipToAws(lambdaFunctionName):
 
 
 def main():
-    uploadDirToAwsLambda()
+    uploadDirToAwsLambda(lambdaFunctionName)
 
 main()
 
