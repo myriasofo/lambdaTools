@@ -17,7 +17,7 @@ lambdat invoke
 
 To deploy:
 ```
-lambdat invoke
+lambdat deploy
 ```
 
 ## To install
