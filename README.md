@@ -1,6 +1,7 @@
 ## Why use this?
 - It's extremely lightweight
-- Deploy and test functions quickly and easily.
+- Deploy and invoke functions with one terminal command
+- Get human-readable log from function invocation
 
 
 ## To use
