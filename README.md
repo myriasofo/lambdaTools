@@ -1,9 +1,10 @@
 ## Why use this?
-To quickly deploy or invoke functions in AWS Lambda
+- It's extremely lightweight
+- Deploy and test functions quickly and easily.
 
 
 ## To use
-To invoke a Lambda function, run this in the terminal:
+To invoke a Lambda function, run this in your terminal:
 ```
 lambdat invoke myFunctionName
 ```
