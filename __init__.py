@@ -1,25 +1,25 @@
 
+### IMPORT LIBRARIES
+import base64
+import importlib
 import os
 import subprocess
 import sys 
-import importlib
-import base64
 import zipfile
 
-
-# For virtual environment (.venv)
+# Import libs from virtual environment (.venv)
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(SCRIPT_DIR + '/.venv/lib/python3.6/site-packages')
 import boto3
 import yaml
 lambdaClient = boto3.client('lambda')
 
-# CONSTANTS
+
+### CONSTANTS
 CONFIG_FILE_NAME = 'lambdat.yml'
 ZIP_TEMP_FILE = 'lambda.zip'
 
-
-# HIGH LEVEL
+### FOR RUNNING VIA BASH
 def run():
     if len(sys.argv) == 2:
         runLambdat(sys.argv[1], None)
@@ -39,6 +39,7 @@ def runLambdat(command, lambdaFunctionName):
         raise Exception('Invalid command:', command)
 
 
+### MAIN FUNCTIONS
 def invokeLambda(lambdaFunctionName):
     response = lambdaClient.invoke(
         FunctionName=lambdaFunctionName,
@@ -53,7 +54,7 @@ def deployLambda(lambdaFunctionName):
     uploadZipToAws(lambdaFunctionName, ZIP_TEMP_FILE)
 
 
-# HELPERS
+### HELPERS
 def getLambdaFunctionName(lambdaFunctionName):
     if lambdaFunctionName == None:
         lambdaFunctionName = guessLambdaFuntionName()
@@ -76,7 +77,6 @@ def assertValidLambdaFunctionName(lambdaFunctionName):
     response = lambdaClient.get_function(
         FunctionName=lambdaFunctionName,
     )
-
 
 def printLog(response):
     rawLog = response['LogResult']
